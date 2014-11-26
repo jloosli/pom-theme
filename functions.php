@@ -169,7 +169,7 @@ function genesis_search_secondary_nav_menu( $menu, stdClass $args ){
                if( genesis_get_option( 'nav_extras' ) )
                 return $menu;
         
-        $menu .= sprintf( '<div class="secondary-search">%s</div>', __( genesis_search_form( $echo ) ) );
+        $menu .= sprintf( '<div class="secondary-search">%s</div>', __( genesis_search_form(  ) ) );
         
         
         return $menu;
