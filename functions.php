@@ -85,7 +85,7 @@ function custom_load_custom_style_sheet() {
 if (!is_admin()) add_action("wp_enqueue_scripts", "my_jquery_enqueue", 11);
 function my_jquery_enqueue() {
    wp_deregister_script('jquery');
-   wp_register_script('jquery', "http" . ($_SERVER['SERVER_PORT'] == 443 ? "s" : "") . "://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js", false, null);
+   wp_register_script('jquery', "//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js", array(), '',true);
    wp_enqueue_script('jquery');
 }
 
@@ -278,7 +278,7 @@ remove_action( 'genesis_footer', 'genesis_do_footer' );
 add_action( 'genesis_footer', 'power_of_moms_footer' );
 function power_of_moms_footer() {
     ?>
-    <p>&copy; Copyright 2008 - <?php echo date("Y") ?> <a href="http://powerofmoms.com">Power of Moms</a> &middot; Website by <a href="http://zachswinehart.com" target="_blank">Zach Swinehart.</a></p>
+    <p>&copy; Copyright 2008 - <?php echo date("Y") ?> <a href="https://powerofmoms.com">Power of Moms</a> &middot; Website by <a href="http://zachswinehart.com" target="_blank">Zach Swinehart.</a></p>
     <?php
 }
 

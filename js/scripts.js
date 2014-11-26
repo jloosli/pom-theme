@@ -16,6 +16,15 @@ jQuery( document ).ready(function( $ ) {
 	}
 	
 		
-	// Image path updating: COMMENT OUT ON LIVE
-	//[].forEach.call($('img'),function(img){var src=img.getAttribute('src');if(src.indexOf('/')===0){img.src='http://powerofmoms.com'+src;}})
+	// Image path updating: when running locally
+	if(window.location.hostname === 'moms.loc'){
+		$('img').each(function(item){
+			"use strict";
+			var src=this.getAttribute('src');
+			if(src.indexOf('/')===0){
+				this.src='http://powerofmoms.com'+src;
+			}
+		});
+	}
+	// [].forEach.call($('img'),function(img){var src=img.getAttribute('src');if(src.indexOf('/')===0){img.src='http://powerofmoms.com'+src;}})
 });
