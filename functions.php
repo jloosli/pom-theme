@@ -231,8 +231,10 @@ Move featured image in archives
 remove_action( 'genesis_entry_content', 'genesis_do_post_image', 8 );
 add_action( 'genesis_entry_header', 'genesis_do_post_image', 1 );
 
-
-
+/*========================================================================
+Add new archive image size
+========================================================================*/
+add_image_size('archive', 170,170, true);
 
 /*========================================================================
 Change default avatar
