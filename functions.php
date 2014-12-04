@@ -133,7 +133,7 @@ function login_bar() {
     );
     echo '<h3>Member Login</h3>';
     echo wp_login_form( $args );
-    echo '<div class="register"><a href="/welcome" class="button">Register</a></div>';
+    echo '<div class="register"><a href="/register" class="button">Register</a></div>';
     echo '<div class="lost_password"><a href="' . wp_lostpassword_url( get_permalink() ) . '" title="Lost Password">Lost Password</a></div>';
 
 
