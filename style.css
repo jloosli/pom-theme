@@ -1429,6 +1429,7 @@ li.comment {
 	display:inline-block;
 	float:left;
 	padding:20px 0;
+    position: relative;
 }
 
 .login-bar #loginform p {
@@ -1442,7 +1443,12 @@ li.comment {
 	margin:0;
 }
 
-.login-bar #loginform .login-username, .login-bar #loginform .login-password {
+#loginform p.login-remember {
+    clear: left;
+    width: 40%;
+}
+
+.login-bar #loginform .login-username, .login-bar #loginform .login-password, #loginform .login-remember {
 	width:35%;
 }
 
@@ -1481,7 +1487,11 @@ li.comment {
 }
 
 .login-bar #loginform .login-submit {
-	margin-top:28px;
+	/*margin-top:28px;*/
+    /*float: right;*/
+    position: absolute;
+    top: 49px;
+    right: 0;
 }
 
 .login-bar .close span:first-child {
@@ -1967,6 +1977,10 @@ nav {
 --------------------------------------------- */
  
 @media only screen and (max-width: 959px) {
+
+    #loginform p {
+        position: relative;
+    }
  
 	.menu-toggle,
 	.sub-menu-toggle {
@@ -2253,10 +2267,11 @@ nav {
 	
 	.login-bar #loginform {
 		padding-top:0;
+        display: block;
 	}
 	
 	.login-bar #loginform .login-submit {
-		margin-top:10px;
+		/*margin-top:10px;*/
 	}
 	
 	.login-bar h3 {
@@ -2275,7 +2290,14 @@ nav {
 	
 	.login-bar #loginform + div.register {
 		padding:0;
+        clear: left;
 	}
+
+    .login-bar #loginform .login-submit {
+        position: relative;
+        display: block;
+        top: 0;
+    }
 	
 	.login-bar .wrap {
 		position:relative;

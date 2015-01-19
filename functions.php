@@ -115,9 +115,10 @@ if ( !is_user_logged_in() ) {
 function login_bar() {
 
     echo '<div class="login-bar collapse" id="login-bar"><div class="wrap">';
+    $request = isset($_GET['wlfrom']) ? $_GET['wlfrom'] : $_SERVER['REQUEST_URI'];
     $args = array(
         'echo'           => true,
-        'redirect'       => site_url( $_SERVER['REQUEST_URI'] ),
+        'redirect'       => $request,
         'form_id'        => 'loginform',
         'label_username' => __( 'Username' ),
         'label_password' => __( 'Password' ),
@@ -127,14 +128,16 @@ function login_bar() {
         'id_password'    => 'user_pass',
         'id_remember'    => 'rememberme',
         'id_submit'      => 'wp-submit',
-        'remember'       => false,
+        'remember'       => true,
         'value_username' => null,
-        'value_remember' => false
+        'value_remember' => true
     );
     echo '<h3>Member Login</h3>';
     echo wp_login_form( $args );
     echo '<div class="register"><a href="/register" class="button">Register</a></div>';
-    echo '<div class="lost_password"><a href="' . wp_lostpassword_url( get_permalink() ) . '" title="Lost Password">Lost Password</a></div>';
+    printf('<div class="lost_password"><a href="%s" title="Lost Password">Lost Password</a></div>',
+        wp_lostpassword_url( get_permalink() )
+    ) ;
 
 
     echo '<button type="button" class="close" data-toggle="collapse" data-target="#login-bar"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button></div></div>';
