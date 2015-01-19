@@ -16,7 +16,7 @@ include_once( get_template_directory() . '/lib/init.php' );
 //* Child theme (do not remove)
 define( 'CHILD_THEME_NAME', 'Power of Moms' );
 define( 'CHILD_THEME_URL', 'http://zachswinehart.com/' );
-define( 'CHILD_THEME_VERSION', '1.0.1' );
+define( 'CHILD_THEME_VERSION', '1.0.2' );
 
 //* Enqueue Google Fonts
 /*add_action( 'wp_enqueue_scripts', 'genesis_sample_google_fonts' );
