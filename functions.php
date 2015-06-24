@@ -84,6 +84,8 @@ function my_jquery_enqueue() {
     wp_deregister_script( 'jquery' );
     wp_register_script( 'jquery', "//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js", array(), '', false );
     wp_enqueue_script( 'jquery' );
+
+    wp_deregister_script('essb-counter-script');
 }
 
 function theme_typekit() {
@@ -362,5 +364,59 @@ function themeprefix_category_header() {
 
 add_action( 'genesis_before_loop', 'themeprefix_category_header' );
 
+function add_alternate_social_urls($content) {
+     if(!is_feed() && (is_single() || is_page())) {
+        global $post;
+        $url = get_permalink($post->ID);
+        $url_variations = array();
+        // https/http
+        if(strpos($url,'https://') === 0){
+            $url_variations[] = str_replace('https://', 'http://', $url);
+        } else {
+            $url_variations[] = str_replace('http://', 'https://', $url);
+        }
+         $alternates = get_post_custom_values( 'essb_alternate_url', $post->ID );
+         if($alternates) {
+             foreach ( $alternates as $val ) {
+                 $url_variations[] = $val;
+             }
+         }
+        $toAdd='';
+        foreach($url_variations as $variation) {
+            $toAdd .= sprintf('<input type="hidden" class="essb_alternate_url" value="%s" />',$variation);
+        }
+        $content = $toAdd.$content;
+    }
+    return $content;
+}
+add_filter('the_content', 'add_alternate_social_urls',10, 1);
 
-?>
+function get_protected_pages() {
+    if(false === ($ids = get_transient('pom_protected_pages'))) {
+        $ids = [ ];
+        if ( function_exists( 'wlmapi_get_protected_pages' ) ) {
+            $pages = wlmapi_get_protected_pages();
+            $ids   = array_merge( $ids, array_map( function ( $item ) {
+                return $item->ID;
+            }, $pages['pages']['page'] ) );
+        }
+        if ( function_exists( 'wlmapi_get_protected_posts' ) ) {
+            $pages = wlmapi_get_protected_posts();
+            $ids   = array_merge( $ids, array_map( function ( $item ) {
+                return $item->ID;
+            }, $pages['posts']['post'] ) );
+        }
+        $ids = array_map( 'intval', $ids );
+        set_transient('pom_protected_pages', $ids, HOUR_IN_SECONDS);
+    }
+    return $ids;
+}
+
+function hide_on_protected_pages($metadata, $object_id, $meta_key, $single) {
+    if($meta_key === 'essb_off' && in_array($object_id, get_protected_pages())) {
+        return 'true';
+    }
+}
+add_filter('get_post_metadata', 'hide_on_protected_pages', 10, 4);
+add_filter('get_page_metadata', 'hide_on_protected_pages', 10, 4);
+
