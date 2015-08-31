@@ -1944,6 +1944,14 @@ body .ubermenu-skin-white.ubermenu-responsive-toggle, body .ubermenu-skin-white.
 	overflow:auto;
 }
 
+/*
+Gravity Forms
+*/
+.gform_wrapper {
+	background-color: #c9c9c9;
+	padding:          15px;
+}
+
 /* Responsive Navigation
 ---------------------------------------------------------------------------------------------------- */
  
